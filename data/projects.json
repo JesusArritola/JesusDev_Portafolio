@@ -1,0 +1,279 @@
+[
+  {
+    "category": "Agentes IA",
+    "projects": [
+      {
+        "image": "/ScreenShoots/Agente IA Personal Telegram.png",
+        "title": "Agente IA Personal Telegram",
+        "description": "Asistente virtual conversacional en Telegram disponible 24/7 que responde preguntas, captura leads y agenda citas automáticamente.",
+        "problem": "Necesidad de atención al cliente continua sin operadores humanos 24/7",
+        "stack": "n8n, OpenAI, Telegram API, Webhooks"
+      },
+      {
+        "image": "/ScreenShoots/Agente_IA_Asistente_Personal_CEO.png",
+        "title": "Agente IA Asistente Personal CEO",
+        "description": "Agente ejecutivo que gestiona agenda, emails, recordatorios y toma de decisiones basadas en datos empresariales.",
+        "problem": "Sobrecarga administrativa en directivos que reduce tiempo estratégico",
+        "stack": "n8n, LangChain, OpenAI, Gmail, Google Calendar"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Marca_Personal.png",
+        "title": "Agente Marca Personal",
+        "description": "Genera contenido de marca personal automatizado: posts, artículos, hilos de Twitter manteniendo voz y estilo consistentes.",
+        "problem": "Creación manual de contenido constante para múltiples plataformas",
+        "stack": "n8n, OpenAI, LangChain, Twitter API, LinkedIn API"
+      },
+      {
+        "image": "/ScreenShoots/Agente IA Contratos (Abogado).png",
+        "title": "Agente IA Contratos (Abogado)",
+        "description": "Genera contratos legales personalizados a partir de plantillas y datos del cliente, listos para revisión y firma.",
+        "problem": "Redacción manual repetitiva de contratos con alto riesgo de errores",
+        "stack": "n8n, OpenAI, Google Docs API, DocuSign"
+      },
+      {
+        "image": "/ScreenShoots/Agente_On_boarding_New_client.png",
+        "title": "Agente Onboarding New Client",
+        "description": "Automatiza bienvenida de nuevos clientes: emails personalizados, documentación, agenda inicial y seguimiento.",
+        "problem": "Proceso de onboarding manual, inconsistente y propenso a olvidos",
+        "stack": "n8n, Gmail, Google Sheets, Calendly, Typeform"
+      },
+      {
+        "image": "/ScreenShoots/Agente HR Department (Onboarding, Reclutamiento, Evaluaciones).png",
+        "title": "Agente HR Department",
+        "description": "Sistema completo de RRHH con reclutamiento, onboarding, evaluaciones de desempeño y gestión de políticas.",
+        "problem": "Gestión de RRHH fragmentada en múltiples herramientas sin automatización",
+        "stack": "n8n, LangChain, OpenAI, Google Sheets, Gmail, Slack"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Automaticación_facturas.png",
+        "title": "Agente Automatización Facturas",
+        "description": "Extrae datos de facturas PDF, valida, categoriza y registra en sistema contable automáticamente.",
+        "problem": "Procesamiento manual de facturas lento y propenso a errores de transcripción",
+        "stack": "n8n, OCR, OpenAI, Google Sheets, ERP API"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Avatar_generator.png",
+        "title": "Agente Avatar Generator",
+        "description": "Genera avatares personalizados con IA a partir de fotos o descripciones para perfiles profesionales.",
+        "problem": "Necesidad de avatares profesionales consistentes sin fotógrafo",
+        "stack": "n8n, Stable Diffusion, Replicate API, Cloudinary"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Correos_Frios.png",
+        "title": "Agente Correos Fríos",
+        "description": "Envía emails fríos hiperpersonalizados usando IA que analiza el perfil del lead y adapta el mensaje.",
+        "problem": "Bajas tasas de respuesta en cold email por falta de personalización",
+        "stack": "n8n, OpenAI, Apollo/LinkedIn API, Gmail, Smartlead"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Creador_de_Freebies.png",
+        "title": "Agente Creador de Freebies",
+        "description": "Crea lead magnets (PDFs, checklists, plantillas) automáticamente a partir de temas definidos.",
+        "problem": "Creación manual de lead magnets consume horas de diseño y redacción",
+        "stack": "n8n, OpenAI, Canva API, Google Drive, PDF generation"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Prompt_Profesionales.png",
+        "title": "Agente Prompt Profesionales",
+        "description": "Genera prompts optimizados para cualquier caso de uso siguiendo mejores prácticas de prompt engineering.",
+        "problem": "Prompts ineficientes que desperdician tokens y dan resultados pobres",
+        "stack": "n8n, OpenAI, Prompt templates library, Vector DB"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Reciclador_de_Contenido_Largo_a_Piezas_Cortas.png",
+        "title": "Agente Reciclador de Contenido",
+        "description": "Transforma contenido largo (webinars, podcasts, artículos) en piezas cortas para redes sociales.",
+        "problem": "Subaprovechamiento de contenido existente por falta de tiempo para repurposing",
+        "stack": "n8n, OpenAI, Whisper, FFmpeg, Social media APIs"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Thumbail.png",
+        "title": "Agente Thumbnail",
+        "description": "Genera miniaturas atractivas para YouTube optimizadas para CTR usando IA generativa.",
+        "problem": "Diseño manual de thumbnails consume tiempo y requiere habilidades gráficas",
+        "stack": "n8n, DALL-E/Midjourney, YouTube API, A/B testing"
+      },
+      {
+        "image": "/ScreenShoots/Agente_generador_de_KPI's_MIO.png",
+        "title": "Agente Generador de KPIs",
+        "description": "Define y calcula KPIs relevantes automáticamente según modelo de negocio y objetivos estratégicos.",
+        "problem": "Definición manual de métricas inconsistente y desconectada de objetivos",
+        "stack": "n8n, OpenAI, Google Sheets, Looker Studio, SQL"
+      },
+      {
+        "image": "/ScreenShoots/Agente_Creador_Campañas_Ads_Meta-Google.png",
+        "title": "Agente Creador de Campañas Ads",
+        "description": "Crea campañas completas de Meta/Google Ads: creatividades, copy, audiencias, estructura de testing.",
+        "problem": "Lanzamiento de campañas lento, inconsistente y sin metodología de testing",
+        "stack": "n8n, OpenAI, Meta Marketing API, Google Ads API, Canva"
+      },
+      {
+        "image": "/ScreenShoots/Viral videos POV By Juan Pe Navarro.png",
+        "title": "Agente Viral Videos POV",
+        "description": "Genera videos virales estilo POV automáticamente: idea, script, imágenes IA, edición, publicación.",
+        "problem": "Producción de video a escala requiere equipo completo y semanas de trabajo",
+        "stack": "n8n, Runway/Gen-2, ElevenLabs, OpenAI, YouTube API, FFmpeg"
+      },
+      {
+        "image": "/ScreenShoots/Veo_3_+_Nano_Banana.png",
+        "title": "Nano Banana Gemini",
+        "description": "Integración con Google Veo 3 y Gemini para generación de video y análisis multimodal avanzado.",
+        "problem": "Acceso temprano y uso eficiente de modelos de video generativo de Google",
+        "stack": "n8n, Google Gemini API, Veo 3, Vertex AI"
+      },
+      {
+        "image": "/ScreenShoots/agente_voz_recepcionista.png",
+        "title": "Agente Voz Recepcionista",
+        "description": "Voicebot que atiende llamadas entrantes, responde FAQs, agenda citas y transfiere a humanos si es necesario.",
+        "problem": "Llamadas perdidas fuera de horario y saturación de recepcionistas humanos",
+        "stack": "n8n, Twilio, ElevenLabs, OpenAI Whisper, Google Calendar"
+      },
+      {
+        "image": "/ScreenShoots/Voice_Agent.png",
+        "title": "Voice Agent",
+        "description": "Agente de voz conversacional para atención al cliente, ventas y soporte técnico 24/7.",
+        "problem": "Escalabilidad limitada de agentes de voz humanos y costos operativos altos",
+        "stack": "n8n, Vapi/Retell, OpenAI, Twilio, CRM integration"
+      }
+    ]
+  },
+  {
+    "category": "Lead Generation",
+    "projects": [
+      {
+        "image": "/ScreenShoots/Lead_Gen_System.png",
+        "title": "Lead Gen System",
+        "description": "Sistema completo de generación de leads: captura, enriquecimiento, scoring y envío a CRM automatizado.",
+        "problem": "Flujo de leads fragmentado entre múltiples herramientas sin visibilidad unificada",
+        "stack": "n8n, Apollo, Clearbit, HubSpot, Google Sheets, Slack"
+      },
+      {
+        "image": "/ScreenShoots/Nuevo_Captador_Leads_Apify.png",
+        "title": "Captador Leads Apify",
+        "description": "Scraping automatizado de leads en directorios web usando Apify, con enriquecimiento y deduplicación.",
+        "problem": "Búsqueda manual de prospectos en directorios consume horas de investigación",
+        "stack": "n8n, Apify, OpenAI, Google Sheets, Email verification API"
+      },
+      {
+        "image": "/ScreenShoots/Consigue_Leads_Ilimitados_GoogleMaps.png",
+        "title": "Consigue Leads Google Maps",
+        "description": "Extrae negocios locales de Google Maps por categoría/ubicación, obtiene emails/teléfonos y exporta a CRM.",
+        "problem": "Prospección local manual limitada a directorios conocidos y datos desactualizados",
+        "stack": "n8n, Apify/Google Maps Scraper, Hunter.io, Google Sheets, CRM"
+      },
+      {
+        "image": "/ScreenShoots/Linkedin_Scrape.png",
+        "title": "LinkedIn Scrape",
+        "description": "Extrae perfiles y empresas de LinkedIn para reclutamiento y prospección B2B con enriquecimiento de datos.",
+        "problem": "Búsqueda manual en LinkedIn lenta y limitada por límites de la plataforma",
+        "stack": "n8n, Apify/PhantomBuster, Dropcontact, Google Sheets, Lemlist"
+      },
+      {
+        "image": "/ScreenShoots/Scrape_Leads.png",
+        "title": "Scrape Leads",
+        "description": "Scraper genérico configurable para extraer leads de cualquier sitio web con paginación y selectores CSS.",
+        "problem": "Necesidad de extraer datos de fuentes web diversas sin desarrollar scrapers a medida",
+        "stack": "n8n, Puppeteer/Cheerio, Apify, Data validation, Google Sheets"
+      },
+      {
+        "image": "/ScreenShoots/TWITTER_FILTRO.png",
+        "title": "Twitter Filtro",
+        "description": "Monitorea Twitter/X por palabras clave, filtra tweets relevantes y extrae leads de conversaciones.",
+        "problem": "Identificación manual de oportunidades en conversaciones sociales en tiempo real",
+        "stack": "n8n, Twitter API v2, OpenAI classification, Google Sheets, Slack alerts"
+      }
+    ]
+  },
+  {
+    "category": "Automatización de Procesos",
+    "projects": [
+      {
+        "image": "/ScreenShoots/Basic_Telegram_Chat.png",
+        "title": "Basic Telegram Chat",
+        "description": "Chatbot básico en Telegram con respuestas predefinidas, menús interactivos y captura de datos simple.",
+        "problem": "Necesidad de canal de comunicación automatizado de bajo costo para FAQs",
+        "stack": "n8n, Telegram Bot API, Webhook, Google Sheets"
+      },
+      {
+        "image": "/ScreenShoots/Chat_Bot_Telegram.png",
+        "title": "Chat Bot Telegram",
+        "description": "Bot conversacional avanzado con IA, memoria de conversación, acciones condicionales y handoff humano.",
+        "problem": "Chatbots basados en reglas rígidas que frustran usuarios con consultas complejas",
+        "stack": "n8n, LangChain, OpenAI, Telegram, Vector DB, Human handoff"
+      },
+      {
+        "image": "/ScreenShoots/Telegram_Sales_Agent_For_Business.png",
+        "title": "Telegram Sales Agent",
+        "description": "Agente de ventas en Telegram que califica leads, presenta productos, agenda demos y cierra citas.",
+        "problem": "Equipo de ventas saturado atendiendo leads no cualificados en canales de chat",
+        "stack": "n8n, LangChain, OpenAI, Telegram, Calendly, CRM, Stripe"
+      },
+      {
+        "image": "/ScreenShoots/Analizador_WEB.png",
+        "title": "Analizador WEB",
+        "description": "Analiza sitios web automáticamente: SEO, performance, seguridad, contenido y genera reportes accionables.",
+        "problem": "Auditorías web manuales repetitivas para múltiples clientes o páginas propias",
+        "stack": "n8n, Puppeteer, Lighthouse API, OpenAI, Google PageSpeed, Google Sheets"
+      },
+      {
+        "image": "/ScreenShoots/Script Generator.png",
+        "title": "Script Generator",
+        "description": "Genera scripts de ventas, videos, emails y presentaciones personalizados según buyer persona y producto.",
+        "problem": "Creación de guiones comerciales desde cero para cada cliente y canal",
+        "stack": "n8n, OpenAI, Prompt templates, Google Docs, Notion"
+      }
+    ]
+  },
+  {
+    "category": "Marketing Digital",
+    "projects": [
+      {
+        "image": "/ScreenShoots/Campañas_Emails.png",
+        "title": "Campañas Emails",
+        "description": "Automatización completa de email marketing: segmentación, secuencias, A/B testing, analytics y deliverability.",
+        "problem": "Gestión manual de campañas en múltiples herramientas sin visión unificada",
+        "stack": "n8n, MailerLite/ActiveCampaign, OpenAI, Google Sheets, Webhooks"
+      },
+      {
+        "image": "/ScreenShoots/Newsletter_Tech_Agent.png",
+        "title": "Newsletter Tech Agent",
+        "description": "Curación y generación automática de newsletter técnica semanal: fuentes, resumen IA, diseño, envío.",
+        "problem": "Curación manual de contenido técnico consume 5-10h/semana para una newsletter de calidad",
+        "stack": "n8n, RSS/News APIs, OpenAI, MJML, SendGrid, Notion"
+      },
+      {
+        "image": "/ScreenShoots/Clasificador_Gmail_Agente.png",
+        "title": "Clasificador Gmail Agente",
+        "description": "Clasifica emails entrantes automáticamente, extrae tareas, responde FAQs y prioriza bandeja de entrada.",
+        "problem": "Gestión de email reactiva que consume 2-3h/día en triage y respuestas rutinarias",
+        "stack": "n8n, Gmail API, OpenAI, Google Tasks, Slack, Calendar"
+      },
+      {
+        "image": "/ScreenShoots/Respuesta_Automatica_Gmails.png",
+        "title": "Respuesta Automática Gmails",
+        "description": "Auto-responde emails frecuentes con plantillas inteligentes personalizadas según contexto y remitente.",
+        "problem": "Respuestas repetitivas a consultas comunes que siguen patrones predecibles",
+        "stack": "n8n, Gmail API, OpenAI, Template engine, CRM sync"
+      }
+    ]
+  },
+  {
+    "category": "Restaurantes y Retail",
+    "projects": [
+      {
+        "image": "/ScreenShoots/Restaurant_Table_Booking.png",
+        "title": "Restaurant Table Booking",
+        "description": "Sistema de reservas por Telegram/Web: disponibilidad real-time, confirmaciones, recordatorios, lista de espera.",
+        "problem": "Gestión de reservas manual por teléfono con errores, overbooking y no-shows",
+        "stack": "n8n, Telegram Bot, Google Calendar, Twilio SMS, POS integration, Sheets"
+      },
+      {
+        "image": "/ScreenShoots/Restaurant Order Chatbot  for POS Integration.png",
+        "title": "Restaurant Order Chatbot",
+        "description": "Chatbot para pedidos en Telegram/Web que se integran directo al POS de cocina y facturación.",
+        "problem": "Pedidos por teléfono/WhatsApp propensos a errores y sin trazabilidad en cocina",
+        "stack": "n8n, Telegram/Web, POS API (Square/Toast), Stripe, Kitchen display, Printer"
+      }
+    ]
+  }
+]

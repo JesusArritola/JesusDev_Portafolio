@@ -1,17 +1,66 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 
 export default function Contact() {
   const [formStatus, setFormStatus] = useState('idle'); // idle | sending | success | error
+  const [validationErrors, setValidationErrors] = useState({});
+  const formRef = useRef(null);
+  const successTimeoutRef = useRef(null);
+
+  // Validación en el cliente
+  function validateForm(data) {
+    const errors = {};
+    
+    // Validar nombre
+    if (!data.name || data.name.trim().length === 0) {
+      errors.name = 'El nombre es requerido';
+    } else if (data.name.length > 100) {
+      errors.name = 'El nombre no puede exceder 100 caracteres';
+    }
+
+    // Validar email
+    if (!data.email || data.email.trim().length === 0) {
+      errors.email = 'El email es requerido';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      errors.email = 'El email no es válido';
+    } else if (data.email === 'jesusarritola@gmail.com') {
+      errors.email = 'No puedes usar la dirección del destinatario';
+    }
+
+    // Validar asunto
+    if (!data.subject || data.subject.trim().length === 0) {
+      errors.subject = 'El asunto es requerido';
+    } else if (data.subject.length > 200) {
+      errors.subject = 'El asunto no puede exceder 200 caracteres';
+    }
+
+    // Validar mensaje
+    if (!data.message || data.message.trim().length === 0) {
+      errors.message = 'El mensaje es requerido';
+    } else if (data.message.length > 5000) {
+      errors.message = 'El mensaje no puede exceder 5000 caracteres';
+    }
+
+    return errors;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setValidationErrors({});
     setFormStatus('sending');
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
+
+    // Validar en el cliente
+    const errors = validateForm(data);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      setFormStatus('idle');
+      return;
+    }
 
     try {
       const res = await fetch('/api/send-email', {
@@ -24,19 +73,23 @@ export default function Contact() {
 
       if (res.ok) {
         setFormStatus('success');
-        if (result.devData) {
-          console.log('=== EMAIL ENVIADO ===');
-          console.log('De:', result.devData.email);
-          console.log('Nombre:', result.devData.name);
-          console.log('Asunto:', `${result.devData.name} - ${result.devData.subject}`);
-          console.log('Mensaje:', result.devData.message);
-        }
+        setValidationErrors({});
         e.target.reset();
+        
+        // Cambiar estado después de 5 segundos
+        if (successTimeoutRef.current) {
+          clearTimeout(successTimeoutRef.current);
+        }
+        successTimeoutRef.current = setTimeout(() => {
+          setFormStatus('idle');
+        }, 5000);
       } else {
         setFormStatus('error');
+        setValidationErrors({ submit: result.error || 'Error al enviar' });
       }
-    } catch {
+    } catch (error) {
       setFormStatus('error');
+      setValidationErrors({ submit: 'Error de conexión. Intenta de nuevo.' });
     }
   };
 
@@ -48,66 +101,114 @@ export default function Contact() {
           Comencemos a Trabajar 🚀! Contáctame !
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-12 max-w-lg mx-auto space-y-6">
+        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 max-w-lg mx-auto space-y-6">
           {formStatus === 'success' && (
-            <p className="text-green-400 text-center text-lg font-semibold">
-              Gracias por contactarme, recibirá una respuesta lo antes posible.
-            </p>
+            <div className="p-4 bg-green-900/20 border border-green-500 rounded-xl">
+              <p className="text-green-400 text-center text-lg font-semibold">
+                ✓ Gracias por contactarme, recibirá una respuesta lo antes posible.
+              </p>
+            </div>
           )}
-          {formStatus === 'error' && (
-            <p className="text-red-400 text-center">Error al enviar. Intenta de nuevo.</p>
+          {formStatus === 'error' && validationErrors.submit && (
+            <div className="p-4 bg-red-900/20 border border-red-500 rounded-xl">
+              <p className="text-red-400 text-center">{validationErrors.submit}</p>
+            </div>
           )}
 
           <div>
-            <label htmlFor="name" className="block text-white mb-2">Nombre</label>
+            <div className="flex justify-between items-center mb-2">
+              <label htmlFor="name" className="block text-white">Nombre</label>
+              <span className="text-white/50 text-xs">máx 100 caracteres</span>
+            </div>
             <input
               id="name"
               name="name"
               type="text"
               placeholder="John Doe"
               autoComplete="name"
+              maxLength="100"
               required
-              className="w-full px-4 py-3 bg-[#101010] border border-[#00f7ff]/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-[#00f7ff]"
+              className={`w-full px-4 py-3 bg-[#101010] border rounded-xl text-white placeholder-white/50 focus:outline-none transition ${
+                validationErrors.name
+                  ? 'border-red-500 focus:border-red-500'
+                  : 'border-[#00f7ff]/20 focus:border-[#00f7ff]'
+              }`}
             />
+            {validationErrors.name && (
+              <p className="text-red-400 text-sm mt-1">{validationErrors.name}</p>
+            )}
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-white mb-2">Correo</label>
+            <div className="flex justify-between items-center mb-2">
+              <label htmlFor="email" className="block text-white">Correo</label>
+              <span className="text-white/50 text-xs">máx 254 caracteres</span>
+            </div>
             <input
               id="email"
               name="email"
               type="email"
               placeholder="johndoe@gmail.com"
               autoComplete="email"
+              maxLength="254"
               required
-              className="w-full px-4 py-3 bg-[#101010] border border-[#00f7ff]/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-[#00f7ff]"
+              className={`w-full px-4 py-3 bg-[#101010] border rounded-xl text-white placeholder-white/50 focus:outline-none transition ${
+                validationErrors.email
+                  ? 'border-red-500 focus:border-red-500'
+                  : 'border-[#00f7ff]/20 focus:border-[#00f7ff]'
+              }`}
             />
+            {validationErrors.email && (
+              <p className="text-red-400 text-sm mt-1">{validationErrors.email}</p>
+            )}
           </div>
 
           <div>
-            <label htmlFor="subject" className="block text-white mb-2">Asunto</label>
+            <div className="flex justify-between items-center mb-2">
+              <label htmlFor="subject" className="block text-white">Asunto</label>
+              <span className="text-white/50 text-xs">máx 200 caracteres</span>
+            </div>
             <input
               id="subject"
               name="subject"
               type="text"
               placeholder="Escribe el asunto"
               autoComplete="off"
+              maxLength="200"
               required
-              className="w-full px-4 py-3 bg-[#101010] border border-[#00f7ff]/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-[#00f7ff]"
+              className={`w-full px-4 py-3 bg-[#101010] border rounded-xl text-white placeholder-white/50 focus:outline-none transition ${
+                validationErrors.subject
+                  ? 'border-red-500 focus:border-red-500'
+                  : 'border-[#00f7ff]/20 focus:border-[#00f7ff]'
+              }`}
             />
+            {validationErrors.subject && (
+              <p className="text-red-400 text-sm mt-1">{validationErrors.subject}</p>
+            )}
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-white mb-2">Cuerpo</label>
+            <div className="flex justify-between items-center mb-2">
+              <label htmlFor="message" className="block text-white">Cuerpo</label>
+              <span className="text-white/50 text-xs">máx 5000 caracteres</span>
+            </div>
             <textarea
               id="message"
               name="message"
               placeholder="Escribe aquí el cuerpo ..."
               rows={5}
               autoComplete="off"
+              maxLength="5000"
               required
-              className="w-full px-4 py-3 bg-[#101010] border border-[#00f7ff]/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-[#00f7ff]"
+              className={`w-full px-4 py-3 bg-[#101010] border rounded-xl text-white placeholder-white/50 focus:outline-none transition resize-none ${
+                validationErrors.message
+                  ? 'border-red-500 focus:border-red-500'
+                  : 'border-[#00f7ff]/20 focus:border-[#00f7ff]'
+              }`}
             />
+            {validationErrors.message && (
+              <p className="text-red-400 text-sm mt-1">{validationErrors.message}</p>
+            )}
           </div>
 
           <button

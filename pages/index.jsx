@@ -21,7 +21,6 @@ const navigation = [
 ];
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   const sectionIds = navigation.map((n) => n.id);
@@ -33,9 +32,16 @@ export default function Home() {
     setActiveSection(scrollSpyActive);
   }, [scrollSpyActive]);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   const handleNavigate = (id) => {
     setActiveSection(id);
-    setMobileMenuOpen(false);
+    closeMenu();
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

@@ -14,7 +14,10 @@ export default function Header({ activeSection, mobileMenuOpen, onToggleMenu, on
       </Link>
 
       <button
+        type="button"
         onClick={onToggleMenu}
+        aria-expanded={mobileMenuOpen}
+        aria-controls="mobile-navigation"
         aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
         className="md:hidden text-white p-2 min-w-[48px] min-h-[48px] flex items-center justify-center"
       >
@@ -46,7 +49,7 @@ export default function Header({ activeSection, mobileMenuOpen, onToggleMenu, on
       </nav>
 
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#080808]/98 border-b border-[#00f7ff]/20 md:hidden">
+        <div id="mobile-navigation" className="absolute top-full left-0 w-full bg-[#080808]/98 border-b border-[#00f7ff]/20 md:hidden">
           <nav className="flex flex-col p-4 gap-2">
             {navigation.map((item) => (
               <a

@@ -49,22 +49,38 @@ export default function Header({ activeSection, mobileMenuOpen, onToggleMenu, on
       </nav>
 
       {mobileMenuOpen && (
-        <div id="mobile-navigation" className="absolute top-full left-0 w-full bg-[#080808]/98 border-b border-[#00f7ff]/20 md:hidden">
-          <nav className="flex flex-col p-4 gap-2">
-            {navigation.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={() => onNavigate(item.id)}
-                className={`py-2 px-4 rounded-lg ${
-                  activeSection === item.id ? 'bg-[#00f7ff]/20 text-[#00f7ff]' : 'text-white hover:bg-white/10'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </div>
+        <>
+          <button
+            type="button"
+            aria-label="Cerrar menú"
+            onClick={onToggleMenu}
+            className="fixed inset-0 top-full bg-black/50 md:hidden"
+          />
+          <div
+            id="mobile-navigation"
+            role="dialog"
+            aria-label="Navegación principal"
+            className="absolute top-full left-0 w-full border-b border-[#00f7ff]/20 bg-[#080808] shadow-lg md:hidden"
+          >
+            <nav className="flex flex-col gap-2 p-4" aria-label="Navegación móvil">
+              {navigation.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    onNavigate(item.id);
+                  }}
+                  className={`rounded-lg px-4 py-3 ${
+                    activeSection === item.id ? 'bg-[#00f7ff]/20 text-[#00f7ff]' : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );

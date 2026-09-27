@@ -32,6 +32,13 @@ export default function Home() {
     setActiveSection(scrollSpyActive);
   }, [scrollSpyActive]);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   const handleNavigate = (id) => {
     setActiveSection(id);
     closeMenu();

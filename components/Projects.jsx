@@ -6,9 +6,27 @@ import { validateProjectsData } from '@/lib/validations/projects';
 import projectsData from '@/content/projects.json';
 
 const validatedProjects = validateProjectsData(projectsData.categories);
+const loadedImageSources = new Set();
+
+function preloadProjectImages() {
+  return validatedProjects.flatMap((category) => category.projects).map((project) => {
+    if (loadedImageSources.has(project.image)) return Promise.resolve();
+
+    return new Promise((resolve) => {
+      const image = new window.Image();
+      image.onload = () => {
+        loadedImageSources.add(project.image);
+        resolve();
+      };
+      image.onerror = resolve;
+      image.src = project.image;
+    });
+  });
+}
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState(() => new Set(loadedImageSources));
   const [expandedCategories, setExpandedCategories] = useState({});
   const [selectedProject, setSelectedProject] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -23,6 +41,16 @@ export default function Projects() {
     window.addEventListener('resize', updateWidth);
     updateWidth();
     return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(preloadProjectImages()).then(() => {
+      if (!cancelled) setLoadedImages(new Set(loadedImageSources));
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -133,13 +161,29 @@ export default function Projects() {
                 className={`project-card group relative overflow-hidden rounded-2xl bg-[#101010] cursor-pointer ${isExpanded ? 'h-48' : 'h-56'}`}
                 onClick={() => setSelectedProject(project)}
               >
+                {!loadedImages.has(project.image) && (
+                  <div
+                    className="absolute inset-0 animate-pulse bg-white/10"
+                    aria-label={`Cargando imagen de ${project.title}`}
+                    role="status"
+                  />
+                )}
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-                  loading="lazy"
+                  className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-500 ${loadedImages.has(project.image) ? 'opacity-100' : 'opacity-0'}`}
+                  loading={offset === 0 ? 'eager' : 'lazy'}
+                  onLoad={() => {
+                    loadedImageSources.add(project.image);
+                    setLoadedImages((previous) => {
+                      if (previous.has(project.image)) return previous;
+                      const nextImages = new Set(previous);
+                      nextImages.add(project.image);
+                      return nextImages;
+                    });
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end items-center p-3 opacity-0 group-hover:opacity-100 transition">
                   <h4 className="text-base font-bold text-white text-center leading-tight">

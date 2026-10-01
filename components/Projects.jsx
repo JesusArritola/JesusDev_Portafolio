@@ -13,6 +13,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [viewportWidth, setViewportWidth] = useState(0);
+  const touchStartX = useRef(null);
 
   const totalCategories = validatedProjects.length;
   const carouselRef = useRef(null);
@@ -29,16 +30,29 @@ export default function Projects() {
   }, [currentIndex]);
 
   const goTo = useCallback((index) => {
-    if (isAnimating) return;
+    if (isAnimating || totalCategories === 0) return;
     setIsAnimating(true);
-    const clamped = ((index % totalCategories) + totalCategories) % totalCategories;
-    setCurrentIndex(clamped);
+    const wrappedIndex = ((index % totalCategories) + totalCategories) % totalCategories;
+    setCurrentIndex(wrappedIndex);
     setExpandedCategories({});
-    setTimeout(() => setIsAnimating(false), 800);
+    window.setTimeout(() => setIsAnimating(false), 800);
   }, [totalCategories, isAnimating]);
 
   const next = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
   const prev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo]);
+
+  const handleTouchStart = useCallback((event) => {
+    touchStartX.current = event.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback((event) => {
+    if (touchStartX.current === null) return;
+    const distance = event.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(distance) < 45) return;
+    if (distance < 0) next();
+    else prev();
+  }, [next, prev]);
 
   const toggleExpand = useCallback((catIndex) => {
     setExpandedCategories((prev) => ({ ...prev, [catIndex]: !prev[catIndex] }));
@@ -59,6 +73,10 @@ export default function Projects() {
     const displayProjects = isExpanded ? cat.projects : cat.projects.slice(0, 3);
 
     let cardStyle = {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transformStyle: 'preserve-3d',
       transition: 'all 800ms cubic-bezier(0.23, 1, 0.32, 1)',
       willChange: 'transform, opacity, width',
     };
@@ -66,7 +84,7 @@ export default function Projects() {
     if (isActive) {
       cardStyle = {
         ...cardStyle,
-        transform: 'translateX(0) scale(1)',
+        transform: 'translate(-50%, -50%) translateX(0) scale(1)',
         opacity: 1,
         zIndex: 20,
         width: viewportWidth < 768 ? '90vw' : viewportWidth < 1024 ? '80vw' : '75vw',
@@ -77,7 +95,7 @@ export default function Projects() {
     } else if (offset === -1) {
       cardStyle = {
         ...cardStyle,
-        transform: 'translateX(-95%) scale(0.92)',
+        transform: 'translate(-50%, -50%) translateX(-108%) scale(0.86) rotateY(8deg)',
         opacity: 0.75,
         zIndex: 10,
         width: viewportWidth < 768 ? '75vw' : '45vw',
@@ -88,7 +106,7 @@ export default function Projects() {
     } else if (offset === 1) {
       cardStyle = {
         ...cardStyle,
-        transform: 'translateX(95%) scale(0.92)',
+        transform: 'translate(-50%, -50%) translateX(108%) scale(0.86) rotateY(-8deg)',
         opacity: 0.75,
         zIndex: 10,
         width: viewportWidth < 768 ? '75vw' : '45vw',
@@ -204,8 +222,13 @@ export default function Projects() {
       </div>
 
       <div className="mt-16">
-        <div className="relative w-full">
-          <div className="flex items-center justify-center min-h-[500px] px-4" ref={carouselRef}>
+        <div className="relative w-full" style={{ perspective: '1800px' }}>
+          <div
+            className="relative flex items-center justify-center min-h-[500px] px-4 touch-pan-y"
+            ref={carouselRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {projectCategories.map((_, i) => {
               let offset = i - currentIndex;
               if (offset > totalCategories / 2) offset -= totalCategories;
@@ -216,7 +239,6 @@ export default function Projects() {
 
           <button
             onClick={prev}
-            disabled={isAnimating}
             aria-label="Categoría anterior"
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 bg-[#00f7ff] rounded-full flex items-center justify-center text-black disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 transition z-20 shadow-lg"
           >
@@ -226,7 +248,6 @@ export default function Projects() {
           </button>
           <button
             onClick={next}
-            disabled={isAnimating}
             aria-label="Categoría siguiente"
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-14 h-14 bg-[#00f7ff] rounded-full flex items-center justify-center text-black disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 transition z-20 shadow-lg"
           >

@@ -25,7 +25,7 @@ export default function Home() {
 
   const sectionIds = navigation.map((n) => n.id);
   const scrollSpyActive = useScrollSpy(sectionIds);
-  const { open: menuOpen, toggle: toggleMenu, close: closeMenu } = useMobileMenu();
+  const { open: menuOpen, toggleMenu, closeMenu } = useMobileMenu();
   useKeyboardNavigation({ onEscape: closeMenu });
 
   useEffect(() => {

@@ -51,17 +51,18 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Jesús Arritola - Portafolio Profesional | Automatización con IA</title>
-        <meta name="description" content="Especialista en automatización de procesos con IA. Desarrollo flujos de trabajo con n8n, chatbots, lead generation y más. Transforma tu negocio con soluciones 24/7." />
-        <meta name="keywords" content="automatización, IA, n8n, chatbot, telegram, WhatsApp, lead generation, workflows, AI, artificial intelligence, automatización de procesos, developer, freelancer" />
-        <meta name="author" content="Jesús Arritola" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="Spanish" />
+        <title>JesusDev | Jesús Arritola — Portafolio de Automatización e IA</title>
+        <meta name="description" content="JesusDev es el portafolio de Jesús Arritola: automatización con IA, n8n, agentes inteligentes, desarrollo web y lead generation para negocios." />
+        <meta name="keywords" content="JesusDev, Jesús Arritola, Jesús Portafolio, JesusDev Portafolio, jesusdev-portafolio.vercel.app, automatización con IA, agentes IA, n8n, desarrollo web, lead generation" />
+        <meta name="author" content="Jesús Miguel Arritola Alonso" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="language" content="es" />
+        <meta name="googlebot" content="index, follow" />
 
-        <meta property="og:title" content="Jesús Arritola - Portafolio Profesional | Automatización con IA" />
-        <meta property="og:description" content="Especialista en automatización de procesos con IA. Desarrollo flujos de trabajo con n8n, chatbots, lead generation y más." />
+        <meta property="og:title" content="JesusDev | Jesús Arritola — Portafolio de Automatización e IA" />
+        <meta property="og:description" content="Conoce el trabajo de Jesús Arritola en automatización con IA, agentes inteligentes, desarrollo web y lead generation." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://jesus-arritola-portafolio.vercel.app" />
+        <meta property="og:url" content="https://jesusdev-portafolio.vercel.app" />
         <meta property="og:image" content="/ScreenShoots/_FOTOS_NANO_BANANA.png" />
         <meta property="og:site_name" content="Jesús Arritola Portfolio" />
 
@@ -74,7 +75,25 @@ export default function Home() {
         <meta name="msapplication-TileColor" content="#080808" />
 
         <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="canonical" href="https://jesus-arritola-portafolio.vercel.app" />
+        <link rel="canonical" href="https://jesusdev-portafolio.vercel.app/" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Jesús Miguel Arritola Alonso',
+              alternateName: ['JesusDev', 'Jesús Arritola'],
+              url: 'https://jesusdev-portafolio.vercel.app/',
+              jobTitle: 'Especialista en automatización con IA',
+              description: 'Especialista en automatización de procesos con IA, agentes inteligentes, n8n y desarrollo web.',
+              knowsAbout: ['Automatización con IA', 'n8n', 'Agentes IA', 'Desarrollo web', 'Lead generation'],
+              sameAs: [
+                'https://jesusdev-portafolio.vercel.app/'
+              ]
+            })
+          }}
+        />
       </Head>
 
       <Header
